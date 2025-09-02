@@ -2,7 +2,7 @@
 -- 定义要关闭的应用程序
 local appsToQuit = { "Skydimo", "NetEaseMusic", "WeChat" }
 -- 定义要打开的应用程序
-local appsToOpen = { "Iterm2", "Skydimo" }
+local appsToOpen = { "Iterm", "Skydimo" }
 
 -- 创建一个 watcher，监听系统睡眠/唤醒/锁屏事件
 lockWatcher = hs.caffeinate.watcher.new(function(eventType)

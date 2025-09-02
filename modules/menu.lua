@@ -15,7 +15,7 @@ function menu.show(width, height, htmlPath)
         -- :windowStyle{"titled", "closable"}
         :allowTextEntry(false)
         :url("file://" .. currentDir .. htmlPath)
-        :level(hs.drawing.windowLevels.status)
+        :level(hs.drawing.windowLevels.popUpMenu)
         :show()
 
     -- hs.timer.doAfter(2, function() menu.hide() end)
