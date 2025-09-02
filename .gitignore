@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+
+# Lua/Hammerspoon
+*.luac
+
+# Spoons (if you use git submodules or download spoons)
+Spoons/*
+!Spoons/.gitkeep
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Backup files
+*~
+*.bak
+
+# Other common ignores
+Thumbs.db
+.idea/
