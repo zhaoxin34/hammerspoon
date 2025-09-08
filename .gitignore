@@ -5,8 +5,8 @@
 *.luac
 
 # Spoons (if you use git submodules or download spoons)
-Spoons/*
-!Spoons/.gitkeep
+# Spoons/*
+# !Spoons/.gitkeep
 
 # VS Code
 .vscode/

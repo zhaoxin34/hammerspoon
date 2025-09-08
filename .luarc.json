@@ -8,7 +8,7 @@
   },
   "diagnostics": {
     "enable": true,
-    "globals": ["hs"]
+    "globals": ["hs", "spoon"]
   },
   "workspace": {
     "library": []
