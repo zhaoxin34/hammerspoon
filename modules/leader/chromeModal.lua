@@ -5,6 +5,7 @@ local menu = require('modules.menu')
 -- 进入模式提示
 function chromeModal:entered()
     menu.show(260, 200, "leader/chrome_menu.html")
+    hs.timer.doAfter(2, function() chromeModal:exit() end)
 end
 
 -- 退出模式提示

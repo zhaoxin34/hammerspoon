@@ -1,6 +1,6 @@
 ------------------------------------------ 锁屏时关闭应用程序 ------------------------------------------------
 -- 定义要关闭的应用程序
-local appsToQuit = { "Skydimo", "NetEaseMusic", "WeChat" }
+local appsToQuit = { "Skydimo", "NetEaseMusic"}
 -- 定义要打开的应用程序
 local appsToOpen = { "Iterm", "Skydimo" }
 
