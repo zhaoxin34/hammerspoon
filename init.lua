@@ -46,3 +46,6 @@ hs.alert("配置已重新加载")
 for i,j in pairs(hs.logger.history()) do
     print(i,j)
 end
+
+require("hs.ipc")
+hs.ipc.cliInstall()

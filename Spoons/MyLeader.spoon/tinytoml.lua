@@ -45,7 +45,7 @@ local function _nsmerror(message, input, byte, anchor)
 end
 
 
-local _unpack = unpack or table.unpack
+local _unpack = table.unpack
 local _tointeger = math.tointeger or tonumber
 
 local _utf8char = utf8 and utf8.char or function(cp)
@@ -975,7 +975,11 @@ function tinytoml.parse(filename, options)
         end
     else
         local file = io.open(filename, "r")
+        if not file then
+            error("Failed to open file: " .. tostring(filename))
+        end
         sm.input = file:read("*all")
+        file:close()
         sm.filename = filename
     end
 
