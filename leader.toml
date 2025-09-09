@@ -1,18 +1,15 @@
 # settings
-leader_key = "rcmd"        # required, the leader key that starts the sequence
-
-# 自动隐藏时间，单位秒，默认5秒
-hide_timeout = 5
-
 # 打开的模式
 enabled_mode = ["mouse"]
 
-[__root__]
+[root]
+show_timeout = 5                  # 自动隐藏时间，单位秒，默认5秒
+label = "My Leader"
 v = ["app", "Visual Studio Code"]
 c = ["app", "Google Chrome"]
 t = ["app", "iTerm"]
 
-[w]
+[root.w]
 label = "window"
 l = ["window", "left"]
 r = ["window", "right"]
