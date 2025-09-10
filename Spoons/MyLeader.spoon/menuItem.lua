@@ -23,14 +23,19 @@ function obj:new(params)
     menuItemObj.key = params.key
     menuItemObj.description = params.description
     menuItemObj.type = params.type or "MENU" -- action, submenu, separator
-    if (menuItemObj.type ~= "MENU" and menuItemObj.type ~= "COMMAND") then
+    if (menuItemObj.type ~= "MENU"
+            and menuItemObj.type ~= "COMMAND"
+            and menuItemObj.type ~= "FUNCTION") then
         error("Invalid menu item type: " .. tostring(menuItemObj.type))
     end
 
-    if (menuItemObj.type == "MENU") then
+    if menuItemObj.type == "MENU" then
         menuItemObj.menu = params.menu
-    elseif (menuItemObj.type == "COMMAND") then
+    elseif menuItemObj.type == "COMMAND" then
         menuItemObj.command = params.command
+    elseif menuItemObj.type == "FUNCTION" then
+        menuItemObj.before = params.before
+        menuItemObj.after = params.after
     end
     return menuItemObj
 end

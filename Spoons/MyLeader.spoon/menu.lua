@@ -9,6 +9,8 @@
 --- @field show function 展示菜单
 --- @field hide function 隐藏菜单
 --- @field isPinned function 是否处于固定状态
+--- @field addItem function 添加菜单项
+--- @field isHidden function 是否处于隐藏状态
 
 local obj = {}
 local log = hs.logger.new('MyLeader.menu', 'info')
@@ -107,17 +109,29 @@ local function createViewModal(menuObj)
         log.d("绑定键: " .. item.key .. " -> " .. hs.inspect(item))
         if not usedKeys[item.key] then
             usedKeys[item.key] = true
-            modal:bind('', item.key, function()
-                if item.type == "COMMAND" and item.command then
+            if item.type == "COMMAND" and item.command then
+                modal:bind('', item.key, function()
                     item.command:execute()
                     if not menuObj:isPinned() then
                         menuObj:hide()
                     end
-                elseif item.type == "MENU" and item.menu then
+                end)
+            elseif item.type == "MENU" and item.menu then
+                modal:bind('', item.key, function()
                     menuObj:hide()
                     item.menu:show()
-                end
-            end)
+                end)
+                -- 自定义方式
+            elseif item.type == "FUNCTION" then
+                modal:bind('', item.key, item.before, function()
+                    item.after()
+                    if not menuObj:isPinned() then
+                        menuObj:hide()
+                    end
+                end)
+            else
+                log.e("未知的菜单项类型: " .. tostring(item.type))
+            end
         else
             log.w("键 " .. item.key .. " 已被使用，跳过绑定")
         end
@@ -150,6 +164,11 @@ end
 --- 是否是固定状态
 function obj:isPinned()
     return self.status == "PINNED"
+end
+
+--- 是否是隐藏状态
+function obj:isHidden()
+    return self.status == "HIDDEN"
 end
 
 function obj:pin()

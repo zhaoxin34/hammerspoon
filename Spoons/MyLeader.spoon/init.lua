@@ -36,6 +36,15 @@ rightCmdKey.onRightCmdUp = function()
     end
 end
 
+-- 添加鼠标模式
+local mouseMenu = require("mouseMenu")
+local menuItem = require("menuItem")
+obj.rootMenu:addItem(menuItem:new({
+    key = "m",
+    description = "启用鼠标模式",
+    type = "MENU",
+    menu = mouseMenu
+}))
 
 -- 加载菜单
 local loadMenu = require("loadMenu")

@@ -26,13 +26,15 @@ local windowCommand = require("windowCommand"):init("window")
 local taskOpenCommand = require("taskOpenCommand"):init("open")
 local urlOpenCommand = require("urlOpenCommand"):init("url")
 local hotkeyCommand = require("hotkeyCommand"):init("hotkey")
+local hsCommand = require("hsCommand"):init("hs")
 
 obj.commands = {
     [appCommand.path] = appCommand,
     [windowCommand.path] = windowCommand,
     [taskOpenCommand.path] = taskOpenCommand,
     [urlOpenCommand.path] = urlOpenCommand,
-    [hotkeyCommand.path] = hotkeyCommand
+    [hotkeyCommand.path] = hotkeyCommand,
+    [hsCommand.path] = hsCommand
 }
 
 function obj:execute()

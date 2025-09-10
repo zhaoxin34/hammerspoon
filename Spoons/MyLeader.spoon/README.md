@@ -53,6 +53,9 @@ flowchart TD
       * menu
     * COMMAND
       * command
+    * FUNCTION
+      * before
+      * after
 
 * 命令 - Command
   * type 也是路径

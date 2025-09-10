@@ -21,7 +21,7 @@ p = [
     "raycast://extensions/raycast/clipboard-history/clipboard-history",
     "打开剪贴板历史记录",
 ]
-q = ["hotkey", [["cmd", "ctrl"], "q"], "锁屏"]
+q = ["hs", "hs.caffeinate.lockScreen()", "锁屏"]
 1 = ["hotkey", [["ctrl"], "tab"], "打开"]
 
 [root.w]
@@ -36,7 +36,7 @@ f = ["window", "full"]
 
 [root.o]
 label = "open"
-order = ["c"]
+order = ["c", "w", "j"]
 c = ["open", "https://chatgpt.com/", "chatGPT"]
 w = ["open", "https://wiki.datatist.cn/", "wiki"]
 j = ["open", "https://jira.datatist.cn/", "jira"]
