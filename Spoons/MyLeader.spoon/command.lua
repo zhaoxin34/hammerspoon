@@ -22,7 +22,7 @@ function obj:new(params)
 end
 
 function obj:execute()
-    log.i(string.format("执行命令: %s (类型: %s)", self.name, self.type))
+    log.i(string.format("执行命令类型: %s", self.type))
     log.d(string.format("命令参数: %s", hs.inspect(self.params)))
 
     if self.type == "task" then

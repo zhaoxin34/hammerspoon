@@ -6,10 +6,14 @@
 --- @field items table 菜单项列表
 --- @field view hs.webview? 菜单视图（可选）
 --- @field status string 菜单状态（"HIDDEN", "SHOWN", "PINNED"）
+--- @field show function 展示菜单
+--- @field hide function 隐藏菜单
 
 local obj = {}
 local log = hs.logger.new('MyLeader.menu', 'debug')
-local hideTimer = nil
+
+-- 当前正在显示的菜单
+obj.shownMenu = nil
 
 local function getMenuHtml(menuObj)
     local html = [[
@@ -66,6 +70,9 @@ local function getMenuHtml(menuObj)
     return html
 end
 
+---create html view for menu
+---@param menuObj menu
+---@return hs.webview
 local function createView(menuObj)
     local screen = hs.screen.mainScreen():frame()
     local width = 260
@@ -83,15 +90,56 @@ local function createView(menuObj)
     return view
 end
 
---- 展示菜单
+---create modal for menu
+---@param menuObj menu
+---@return hs.hotkey.modal
+local function createViewModal(menuObj)
+    local modal = hs.hotkey.modal.new()
+
+    modal:bind('', 'escape', function()
+        modal:exit()
+        menuObj:hide()
+    end)
+
+    -- 避免重复绑定相同的键
+    local usedKeys = {}
+    for _, item in ipairs(menuObj.items) do
+        log.d("绑定键: " .. item.key .. " -> " .. hs.inspect(item))
+        if not usedKeys[item.key] then
+            usedKeys[item.key] = true
+            modal:bind('', item.key, function()
+                if item.type == "COMMAND" and item.command then
+                    item.command:execute()
+                    modal:exit()
+                    menuObj:hide()
+                elseif item.type == "MENU" and item.menu then
+                    modal:exit()
+                    menuObj:hide()
+                    item.menu:show()
+                end
+            end)
+        else
+            log.w("键 " .. item.key .. " 已被使用，跳过绑定")
+        end
+    end
+
+    return modal
+end
+
+--- 展示菜单, 创建modal
 function obj:show()
-    if self:isShown() or self:isPinned() then
+    if self:isShown() or self:isPinned() or obj.shownMenu then
         return
     end
     self.view = self.view or createView(self)
+    self.modal = self.modal or createViewModal(self)
     self.view:show()
-    hideTimer = hs.timer.doAfter(self.hideTimeout, function() self:hide() end)
+    self.modal:enter()
+    self.hideTimer = hs.timer.doAfter(self.hideTimeout, function() self:hide() end)
     self.status = "SHOWN"
+
+    -- 当前展示的菜单
+    obj.shownMenu = self
 end
 
 --- 是否是展示状态
@@ -109,9 +157,9 @@ function obj:pin()
         return
     end
     self.status = "PINNED"
-    if hideTimer then
-        hideTimer:stop()
-        hideTimer = nil
+    if self.hideTimer then
+        self.hideTimer:stop()
+        self.hideTimer = nil
     end
 end
 
@@ -122,10 +170,11 @@ function obj:hide()
         self.view = nil
     end
     self.status = "HIDDEN"
-    if hideTimer then
-        hideTimer:stop()
-        hideTimer = nil
+    if self.hideTimer then
+        self.hideTimer:stop()
+        self.hideTimer = nil
     end
+    obj.shownMenu = nil
 end
 
 --- 初始化菜单
@@ -133,7 +182,6 @@ end
 ---     name = "菜单名称",
 ---     id = "菜单ID",
 ---     fatherId = "父菜单ID",
----     items = { 子菜单列表 }
 --- }
 function obj:new(params)
     local menuObj = {}
@@ -142,7 +190,7 @@ function obj:new(params)
     menuObj.id = params.id
     menuObj.name = params.name
     menuObj.father = params.father
-    menuObj.items = params.items or {}
+    menuObj.items = {}
     menuObj.hideTimeout = 2
     return menuObj
 end

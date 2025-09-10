@@ -16,27 +16,27 @@ log.d("配置内容: " .. hs.inspect(config))
 
 -- 加载菜单
 local menu = require("menu")
-obj.menu = menu:new({
-    name = 'test',
-    id = 'test_id',
+obj.rootMenu = menu:new({
+    name = '',
+    id = '',
     father = nil,
 })
 
 local rightCmdKey = require("rightCmdKey")
 
 rightCmdKey.onRightCmdUp = function()
-    if obj.menu:isShown() then
-        obj.menu:pin()
-    elseif obj.menu:isPinned() then
-        obj.menu:hide()
+    if obj.rootMenu:isShown() then
+        obj.rootMenu:pin()
+    elseif obj.rootMenu:isPinned() then
+        obj.rootMenu:hide()
     else
-        obj.menu:show()
+        obj.rootMenu:show()
     end
 end
 
 
 -- 加载菜单
 local loadMenu = require("loadMenu")
-loadMenu(obj.menu, config["root"])
+loadMenu(obj.rootMenu, config["root"])
 
 return obj
