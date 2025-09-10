@@ -6,7 +6,7 @@ enabled_mode = ["mouse"]
 show_timeout = 5    # 自动隐藏时间，单位秒，默认5秒
 label = "My Leader"
 # 显式指定菜单项顺序
-order = ["v", "c", "t", "w", "o", "s", "p", "q", "1"]
+order = ["v", "c", "t", "w", "o", "s", "p", "q", "b"]
 
 v = ["app", "Visual Studio Code"]
 c = ["app", "Google Chrome"]
@@ -22,7 +22,7 @@ p = [
     "打开剪贴板历史记录",
 ]
 q = ["hs", "hs.caffeinate.lockScreen()", "锁屏"]
-1 = ["hotkey", [["ctrl"], "tab"], "打开"]
+b = ["open", "https://www.bilibili.com/", "哔哩哔哩", "tpzhao"]
 
 [root.w]
 label = "window"

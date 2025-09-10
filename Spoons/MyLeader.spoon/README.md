@@ -56,6 +56,7 @@ flowchart TD
     * FUNCTION
       * before
       * after
+  * env 根据wifi判断环境
 
 * 命令 - Command
   * type 也是路径

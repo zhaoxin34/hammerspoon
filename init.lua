@@ -40,3 +40,6 @@ hs.alert("配置已重新加载")
 -- hs.eventtap.keyStroke({"cmd", "ctrl" }, "q")
 -- hs.eventtap.keyStroke({ "ctrl" }, "tab", 0)
 hs.loadSpoon('EmmyLua')
+
+-- 调用这个加载location模块到定位隐私列表，进而可以打开权限
+hs.location.get()

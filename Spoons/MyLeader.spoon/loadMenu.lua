@@ -3,6 +3,8 @@ local log = hs.logger.new('MyLeader.loadMenu', 'info')
 local command = require("command")
 local menu = require("menu")
 local menuItem = require("menuItem")
+local wifiName = hs.wifi.currentNetwork() or ""
+print("当前WiFi: " .. wifiName)
 
 local function loadMenu(_menu, _config)
     _menu.hideTimeout = _config["show_timeout"] or 2
@@ -75,11 +77,17 @@ local function loadMenu(_menu, _config)
                 params = item[2],
                 description = item[3] or item[2],
             })
+            local env = item[4] or nil
+            if env
+                and not string.find(wifiName, "^" .. env) then
+                goto continue
+            end
             local menuItemObj = menuItem:new({
                 key = key,
                 description = commandObj.description,
                 type = "COMMAND",
                 command = commandObj,
+                env = env
             })
             _menu:addItem(menuItemObj)
         elseif type(item) == "table" and item.label then
@@ -96,6 +104,7 @@ local function loadMenu(_menu, _config)
             _menu:addItem(menuItemObj)
             loadMenu(subMenu, item)
         end
+        ::continue::
     end
 end
 

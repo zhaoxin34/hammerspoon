@@ -5,6 +5,7 @@
 --- @field type string 菜单项类型
 --- @field menu table? 子菜单（可选）
 --- @field father table? 父菜单（可选）
+--- @field env string? 环境（可选）
 local obj = {}
 
 --- 创建菜单项
@@ -23,6 +24,7 @@ function obj:new(params)
     menuItemObj.key = params.key
     menuItemObj.description = params.description
     menuItemObj.type = params.type or "MENU" -- action, submenu, separator
+    menuItemObj.env = params.env or nil
     if (menuItemObj.type ~= "MENU"
             and menuItemObj.type ~= "COMMAND"
             and menuItemObj.type ~= "FUNCTION") then
