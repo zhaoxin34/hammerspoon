@@ -5,7 +5,7 @@
 --- @field params table 命令参数
 
 -- 创建一个logger实例
-local log = hs.logger.new('MyLeader.command', 'debug')
+local log = hs.logger.new('MyLeader.command', 'info')
 
 local obj = {}
 
@@ -21,18 +21,25 @@ function obj:new(params)
     return commandObj
 end
 
-function obj:execute()
-    log.i(string.format("执行命令类型: %s", self.type))
-    log.d(string.format("命令参数: %s", hs.inspect(self.params)))
+local appCommand = require("appCommand"):init("app")
+local windowCommand = require("windowCommand"):init("window")
+local taskOpenCommand = require("taskOpenCommand"):init("open")
+local urlOpenCommand = require("urlOpenCommand"):init("url")
+local hotkeyCommand = require("hotkeyCommand"):init("hotkey")
 
-    if self.type == "task" then
-        log.d("执行任务类型命令")
-    elseif self.type == "hotkey" then
-        log.d("执行热键类型命令")
-    elseif self.type == "window" then
-        log.d("执行窗口类型命令")
-    elseif self.type == "app" then
-        log.d("执行应用类型命令")
+obj.commands = {
+    [appCommand.path] = appCommand,
+    [windowCommand.path] = windowCommand,
+    [taskOpenCommand.path] = taskOpenCommand,
+    [urlOpenCommand.path] = urlOpenCommand,
+    [hotkeyCommand.path] = hotkeyCommand
+}
+
+function obj:execute()
+    log.d(string.format("执行命令类型: %s", self.type))
+    log.d(string.format("命令参数: %s", hs.inspect(self.params)))
+    if obj.commands[self.type] then
+        obj.commands[self.type]:execute(self.params)
     else
         log.e(string.format("无效的命令类型: %s", self.type))
     end

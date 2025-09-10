@@ -3,23 +3,40 @@
 enabled_mode = ["mouse"]
 
 [root]
-show_timeout = 5                  # 自动隐藏时间，单位秒，默认5秒
+show_timeout = 5    # 自动隐藏时间，单位秒，默认5秒
 label = "My Leader"
 # 显式指定菜单项顺序
-order = ["v", "c", "t", "w"]
+order = ["v", "c", "t", "w", "o", "s", "p", "q", "1"]
 
 v = ["app", "Visual Studio Code"]
 c = ["app", "Google Chrome"]
 t = ["app", "iTerm"]
+s = [
+    "url",
+    "raycast://extensions/Codely/google-chrome/search-tab",
+    "打开Chrome搜索标签页",
+]
+p = [
+    "url",
+    "raycast://extensions/raycast/clipboard-history/clipboard-history",
+    "打开剪贴板历史记录",
+]
+q = ["hotkey", [["cmd", "ctrl"], "q"], "锁屏"]
+1 = ["hotkey", [["ctrl"], "tab"], "打开"]
 
 [root.w]
 label = "window"
 # 显式指定子菜单顺序
-order = ["l", "r", "c", "f", "m", "u", "d"]
-l = ["window", "left"]
-r = ["window", "right"]
-f = ["window", "fullscreen"]
-m = ["window", "maximize"]
-c = ["window", "center"]
+order = ["h", "l", "u", "j", "f"]
+h = ["window", "left"]
+l = ["window", "right"]
 u = ["window", "up"]
-d = ["window", "down"]
+j = ["window", "down"]
+f = ["window", "full"]
+
+[root.o]
+label = "open"
+order = ["c"]
+c = ["open", "https://chatgpt.com/", "chatGPT"]
+w = ["open", "https://wiki.datatist.cn/", "wiki"]
+j = ["open", "https://jira.datatist.cn/", "jira"]

@@ -8,9 +8,10 @@
 --- @field status string 菜单状态（"HIDDEN", "SHOWN", "PINNED"）
 --- @field show function 展示菜单
 --- @field hide function 隐藏菜单
+--- @field isPinned function 是否处于固定状态
 
 local obj = {}
-local log = hs.logger.new('MyLeader.menu', 'debug')
+local log = hs.logger.new('MyLeader.menu', 'info')
 
 -- 当前正在显示的菜单
 obj.shownMenu = nil
@@ -76,8 +77,8 @@ end
 local function createView(menuObj)
     local screen = hs.screen.mainScreen():frame()
     local width = 260
-    local titleHeight = 28
-    local height = #menuObj.items * 23 + titleHeight
+    local titleHeight = 30
+    local height = #menuObj.items * 21 + titleHeight
     local x = screen.w - width - 30
     local y = screen.h - height - 30
 
@@ -97,7 +98,6 @@ local function createViewModal(menuObj)
     local modal = hs.hotkey.modal.new()
 
     modal:bind('', 'escape', function()
-        modal:exit()
         menuObj:hide()
     end)
 
@@ -110,10 +110,10 @@ local function createViewModal(menuObj)
             modal:bind('', item.key, function()
                 if item.type == "COMMAND" and item.command then
                     item.command:execute()
-                    modal:exit()
-                    menuObj:hide()
+                    if not menuObj:isPinned() then
+                        menuObj:hide()
+                    end
                 elseif item.type == "MENU" and item.menu then
-                    modal:exit()
                     menuObj:hide()
                     item.menu:show()
                 end
@@ -153,6 +153,7 @@ function obj:isPinned()
 end
 
 function obj:pin()
+    log.i("pin menu: " .. (self.name))
     if not self:isShown() then
         return
     end
@@ -168,6 +169,10 @@ function obj:hide()
     if self.view then
         self.view:delete()
         self.view = nil
+    end
+    if self.modal then
+        self.modal:exit()
+        self.modal = nil
     end
     self.status = "HIDDEN"
     if self.hideTimer then

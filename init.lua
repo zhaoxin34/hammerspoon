@@ -37,4 +37,6 @@ hs.alert("配置已重新加载")
 
 -- -- hs.task.new("/usr/bin/env", nil, { "open", "https://www.google.com" }):start()
 
+-- hs.eventtap.keyStroke({"cmd", "ctrl" }, "q")
+-- hs.eventtap.keyStroke({ "ctrl" }, "tab", 0)
 hs.loadSpoon('EmmyLua')

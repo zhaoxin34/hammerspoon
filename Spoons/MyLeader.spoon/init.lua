@@ -25,12 +25,14 @@ obj.rootMenu = menu:new({
 local rightCmdKey = require("rightCmdKey")
 
 rightCmdKey.onRightCmdUp = function()
-    if obj.rootMenu:isShown() then
-        obj.rootMenu:pin()
-    elseif obj.rootMenu:isPinned() then
-        obj.rootMenu:hide()
-    else
+    if not menu.shownMenu then
         obj.rootMenu:show()
+    else
+        if menu.shownMenu:isShown() then
+            menu.shownMenu:pin()
+        elseif menu.shownMenu:isPinned() then
+            menu.shownMenu:hide()
+        end
     end
 end
 
