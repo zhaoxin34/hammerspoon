@@ -31,12 +31,14 @@ flowchart TD
   * 属性
     * id
     * name
-    * fatherId
+    * father
     * items
     * status
       * PINED
       * SHOWN
       * HIDDEN
+    * timeout 展示的超时时间（秒）
+    * view webview对象
   * 方法
     * show
     * hide
@@ -48,19 +50,18 @@ flowchart TD
   * description
   * type
     * MENU
-      * items
+      * menu
     * COMMAND
-      * path
-      * params
+      * command
 
 * 命令 - Command
-  * name | path
-  * desciption
-  * type
+  * type 也是路径
     * hotkey
     * window
     * app
     * task
+  * params 参数
+  * desciption
 
 * 命令管理器 - CommandRegister
   * regist(command)
