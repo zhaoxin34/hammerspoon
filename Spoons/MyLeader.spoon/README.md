@@ -39,6 +39,7 @@ flowchart TD
       * HIDDEN
     * timeout 展示的超时时间（秒）
     * view webview对象
+    * mode show后状态：pin or float
   * 方法
     * show
     * hide

@@ -1,12 +1,14 @@
 # settings
 # 打开的模式
-enabled_mode = ["mouse"]
+enabled_mode = ["chrome"]
+# 模式呼出键
+mode_key = "tab"
 
 [root]
-show_timeout = 5    # 自动隐藏时间，单位秒，默认5秒
-label = "My Leader"
+show_timeout = 5   # 自动隐藏时间，单位秒，默认5秒
+name = "My Leader"
 # 显式指定菜单项顺序
-order = ["v", "c", "t", "w", "o", "s", "p", "q", "b"]
+order = ["v", "c", "t", "w", "o", "s", "p", "q", "b", "x", "h"]
 
 v = ["app", "Visual Studio Code"]
 c = ["app", "Google Chrome"]
@@ -25,7 +27,7 @@ q = ["hs", "hs.caffeinate.lockScreen()", "锁屏"]
 b = ["open", "https://www.bilibili.com/", "哔哩哔哩", "tpzhao"]
 
 [root.w]
-label = "window"
+name = "window"
 # 显式指定子菜单顺序
 order = ["h", "l", "u", "j", "f"]
 h = ["window", "left"]
@@ -35,8 +37,28 @@ j = ["window", "down"]
 f = ["window", "full"]
 
 [root.o]
-label = "open"
+name = "open"
 order = ["c", "w", "j"]
 c = ["open", "https://chatgpt.com/", "chatGPT"]
 w = ["open", "https://wiki.datatist.cn/", "wiki"]
 j = ["open", "https://jira.datatist.cn/", "jira"]
+
+[root.x]
+name = "text"
+1 = [
+    "text",
+    "k exec -it -n dev-wolf wolf-campaign-streaming-master0 -- bash",
+    "进入straming master容器",
+]
+
+[root.h]
+name = "hammerspoon"
+r = ["hs", "hs.reload()", "重载配置"]
+l = ["hs", "hs.openConsole()", "打开控制台"]
+
+[modes.chrome]
+name = "Google Chrome"
+order = ["h", "l", "s"]
+l = ["hotkey", [["ctrl"], "tab"], "切换到左侧标签页"]
+h = ["hotkey", [["ctrl", "shift"], "tab"], "切换到右侧标签页"]
+s = ["hotkey", [["shift", "cmd"], "a"], "搜索标签页"]

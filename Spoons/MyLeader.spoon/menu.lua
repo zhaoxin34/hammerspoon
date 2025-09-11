@@ -6,14 +6,20 @@
 --- @field items table 菜单项列表
 --- @field view hs.webview? 菜单视图（可选）
 --- @field status string 菜单状态（"HIDDEN", "SHOWN", "PINNED"）
+--- @field mode string 菜单模式（"FLOAT", "PIN"）
 --- @field show function 展示菜单
 --- @field hide function 隐藏菜单
 --- @field isPinned function 是否处于固定状态
 --- @field addItem function 添加菜单项
 --- @field isHidden function 是否处于隐藏状态
+--- @field shownMenu menu? 当前正在显示的菜单（可选）
+--- @field modeKey string? 模式呼出键（可选）
+--- @field modeKeyPressCallback function? 模式呼出键按下回调（可选）
 
 local obj = {}
 local log = hs.logger.new('MyLeader.menu', 'info')
+obj.modeKey = nil
+obj.modeKeyPressCallback = nil
 
 -- 当前正在显示的菜单
 obj.shownMenu = nil
@@ -37,6 +43,7 @@ local function getMenuHtml(menuObj)
             .menu-item {
                 font-size: 13px;
                 padding: 2px 10px;
+                line-height: 16px;
             }
 
             .hot-key {
@@ -103,6 +110,13 @@ local function createViewModal(menuObj)
         menuObj:hide()
     end)
 
+    -- 绑定模式呼出键
+    if obj.modeKey and obj.modeKeyPressCallback then
+        modal:bind('', obj.modeKey, function()
+            obj.modeKeyPressCallback()
+        end)
+    end
+
     -- 避免重复绑定相同的键
     local usedKeys = {}
     for _, item in ipairs(menuObj.items) do
@@ -149,8 +163,12 @@ function obj:show()
     self.modal = self.modal or createViewModal(self)
     self.view:show()
     self.modal:enter()
-    self.hideTimer = hs.timer.doAfter(self.hideTimeout, function() self:hide() end)
-    self.status = "SHOWN"
+    if self.mode == "FLOAT" then
+        self.status = "SHOWN"
+        self.hideTimer = hs.timer.doAfter(self.hideTimeout, function() self:hide() end)
+    else
+        self.status = "PINNED"
+    end
 
     -- 当前展示的菜单
     obj.shownMenu = self
@@ -216,6 +234,7 @@ function obj:new(params)
     menuObj.father = params.father
     menuObj.items = {}
     menuObj.hideTimeout = 2
+    menuObj.mode = params.mode or "FLOAT"
     return menuObj
 end
 

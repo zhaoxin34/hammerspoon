@@ -4,11 +4,10 @@ local command = require("command")
 local menu = require("menu")
 local menuItem = require("menuItem")
 local wifiName = hs.wifi.currentNetwork() or ""
-print("当前WiFi: " .. wifiName)
 
 local function loadMenu(_menu, _config)
     _menu.hideTimeout = _config["show_timeout"] or 2
-    _menu.name = _config["label"] or "My Leader"
+    _menu.name = _config["name"] or "My Leader"
     log.d("加载配置: " .. hs.inspect(_config))
 
     -- 获取菜单项的键列表，支持显式顺序
@@ -26,7 +25,7 @@ local function loadMenu(_menu, _config)
 
         -- 添加未在 order 中指定但存在的键
         for key, _ in pairs(_config) do
-            if key ~= "show_timeout" and key ~= "label" and key ~= "order" then
+            if key ~= "show_timeout" and key ~= "name" and key ~= "order" then
                 local found = false
                 for _, orderedKey in ipairs(order) do
                     if orderedKey == key then
@@ -43,7 +42,7 @@ local function loadMenu(_menu, _config)
         -- 没有指定顺序，使用默认排序规则
         log.d("使用默认排序")
         for key, _ in pairs(_config) do
-            if key ~= "show_timeout" and key ~= "label" and key ~= "order" then
+            if key ~= "show_timeout" and key ~= "name" and key ~= "order" then
                 table.insert(keys, key)
             end
         end
@@ -70,7 +69,7 @@ local function loadMenu(_menu, _config)
         local item = _config[key]
         log.d("加载菜单项: " .. key .. ":" .. hs.inspect(item))
 
-        if type(item) == "table" and not item.label then
+        if type(item) == "table" and not item.name then
             -- 这是一个命令
             local commandObj = command:new({
                 type = item[1],
@@ -90,14 +89,14 @@ local function loadMenu(_menu, _config)
                 env = env
             })
             _menu:addItem(menuItemObj)
-        elseif type(item) == "table" and item.label then
+        elseif type(item) == "table" and item.name then
             -- 这是一个子菜单
             local subMenu = menu:new({
-                name = item.label,
+                name = item.name,
             })
             local menuItemObj = menuItem:new({
                 key = key,
-                description = item.label,
+                description = item.name,
                 type = "MENU",
                 menu = subMenu,
             })
