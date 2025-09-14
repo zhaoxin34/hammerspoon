@@ -40,6 +40,7 @@ flowchart TD
     * timeout 展示的超时时间（秒）
     * view webview对象
     * mode show后状态：pin or float
+    * pinTimeout pin状态的超时时间，pin后如果没有操作超过这个时间就自动隐藏
   * 方法
     * show
     * hide

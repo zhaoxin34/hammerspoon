@@ -62,4 +62,7 @@ menu.modeKeyPressCallback = function()
     local appName = app:name() or ""
     modes.onAppFocus(appName)
 end
+
+-- 打开应用后，使用yabai和appWatch跳转到对应space
+-- require("yabaiLaunchAppCallback")
 return obj

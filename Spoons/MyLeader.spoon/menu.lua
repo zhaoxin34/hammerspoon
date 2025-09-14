@@ -86,7 +86,7 @@ end
 local function createView(menuObj)
     local screen = hs.screen.mainScreen():frame()
     local width = 260
-    local titleHeight = 30
+    local titleHeight = 32
     local height = #menuObj.items * 21 + titleHeight
     local x = screen.w - width - 30
     local y = screen.h - height - 30

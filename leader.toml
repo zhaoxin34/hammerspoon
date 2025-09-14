@@ -8,16 +8,7 @@ mode_key = "tab"
 show_timeout = 5   # 自动隐藏时间，单位秒，默认5秒
 name = "My Leader"
 # 显式指定菜单项顺序
-order = ["v", "c", "t", "w", "o", "s", "p", "q", "b", "x", "h"]
-
-v = ["app", "Visual Studio Code"]
-c = ["app", "Google Chrome"]
-t = ["app", "iTerm"]
-s = [
-    "url",
-    "raycast://extensions/Codely/google-chrome/search-tab",
-    "打开Chrome搜索标签页",
-]
+order = ["a", "s", "o", "p", "q", "b", "x", "h"]
 p = [
     "url",
     "raycast://extensions/raycast/clipboard-history/clipboard-history",
@@ -26,15 +17,48 @@ p = [
 q = ["hs", "hs.caffeinate.lockScreen()", "锁屏"]
 b = ["open", "https://www.bilibili.com/", "哔哩哔哩", "tpzhao"]
 
+[root.a]
+name = "Apps"
+order = ["c", "v", "b", "i", "w", "s"]
+v = ["app", "Visual Studio Code"]
+c = ["app", "Cursor"]
+b = ["app", "Google Chrome"]
+i = ["app", "iTerm"]
+w = ["app", "Wechat"]
+s = [
+    "url",
+    "raycast://extensions/Codely/google-chrome/search-tab",
+    "打开Chrome搜索标签页",
+]
+
+
+[root.s]
+name = "space"
+# 显式指定子菜单顺序
+order = ["1", "2", "3", "4", "5", "h", "l", "r"]
+1 = ["hotkey", [["ctrl", "shift"], "1"], "space 1"]
+2 = ["hotkey", [["ctrl", "shift"], "2"], "space 2"]
+3 = ["hotkey", [["ctrl", "shift"], "3"], "space 3"]
+4 = ["hotkey", [["ctrl", "shift"], "4"], "space 4"]
+5 = ["hotkey", [["ctrl", "shift"], "5"], "space 5"]
+r = ["yabai", ["-m", "space", "--focus", "recent"], "recent space"]
+h = ["yabai", ["-m", "space", "--focus", "prev"], "prev space"]
+l = ["yabai", ["-m", "space", "--focus", "next"], "next space"]
+
 [root.w]
 name = "window"
-# 显式指定子菜单顺序
-order = ["h", "l", "u", "j", "f"]
-h = ["window", "left"]
-l = ["window", "right"]
-u = ["window", "up"]
-j = ["window", "down"]
-f = ["window", "full"]
+order = ["h", "l", "l", "r", "[", "]"]
+h = ["yabai", ["-m", "window", "--focus", "west"], "focus west window"]
+l = ["yabai", ["-m", "window", "--focus", "east"], "focus east window"]
+r = ["yabai", ["-m", "window", "--focus", "recent"], "focus recent window"]
+"[" = ["yabai", ["-m", "window", "--focus", "prev"], "focus prev window"]
+"]" = ["yabai", ["-m", "window", "--focus", "next"], "focus next window"]
+
+# h = ["window", "left"]
+# l = ["window", "right"]
+# u = ["window", "up"]
+# j = ["window", "down"]
+# f = ["window", "full"]
 
 [root.o]
 name = "open"
@@ -50,6 +74,7 @@ name = "text"
     "k exec -it -n dev-wolf wolf-campaign-streaming-master0 -- bash",
     "进入straming master容器",
 ]
+2 = ["text", "ps axu|grep java| awk '{print $2}'|xargs kill -9", "杀掉所有java进程"]
 
 [root.h]
 name = "hammerspoon"
@@ -61,4 +86,4 @@ name = "Google Chrome"
 order = ["h", "l", "s"]
 l = ["hotkey", [["ctrl"], "tab"], "切换到左侧标签页"]
 h = ["hotkey", [["ctrl", "shift"], "tab"], "切换到右侧标签页"]
-s = ["hotkey", [["shift", "cmd"], "a"], "搜索标签页"]
+# s = ["hotkey", [["shift", "cmd"], "a"], "搜索标签页"]

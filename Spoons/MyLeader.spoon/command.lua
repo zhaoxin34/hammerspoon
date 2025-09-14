@@ -28,6 +28,8 @@ local urlOpenCommand = require("urlOpenCommand"):init("url")
 local hotkeyCommand = require("hotkeyCommand"):init("hotkey")
 local hsCommand = require("hsCommand"):init("hs")
 local textCommand = require("textCommand"):init("text")
+local taskCommand = require("taskCommand"):init("task")
+local yabaiCommand = require("yabaiCommand"):init("yabai")
 
 obj.commands = {
     [appCommand.path] = appCommand,
@@ -36,7 +38,9 @@ obj.commands = {
     [urlOpenCommand.path] = urlOpenCommand,
     [hotkeyCommand.path] = hotkeyCommand,
     [hsCommand.path] = hsCommand,
-    [textCommand.path] = textCommand
+    [textCommand.path] = textCommand,
+    [taskCommand.path] = taskCommand,
+    [yabaiCommand.path] = yabaiCommand,
 }
 
 function obj:execute()
