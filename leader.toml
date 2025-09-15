@@ -35,24 +35,58 @@ s = [
 [root.s]
 name = "space"
 # 显式指定子菜单顺序
-order = ["1", "2", "3", "4", "5", "h", "l", "r"]
+order = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "h", "l", "r", "s"]
 1 = ["hotkey", [["ctrl", "shift"], "1"], "space 1"]
 2 = ["hotkey", [["ctrl", "shift"], "2"], "space 2"]
 3 = ["hotkey", [["ctrl", "shift"], "3"], "space 3"]
 4 = ["hotkey", [["ctrl", "shift"], "4"], "space 4"]
 5 = ["hotkey", [["ctrl", "shift"], "5"], "space 5"]
+6 = ["hotkey", [["ctrl", "shift"], "6"], "space 6"]
+7 = ["hotkey", [["ctrl", "shift"], "7"], "space 7"]
+8 = ["hotkey", [["ctrl", "shift"], "8"], "space 8"]
+9 = ["hotkey", [["ctrl", "shift"], "9"], "space 9"]
 r = ["yabai", ["-m", "space", "--focus", "recent"], "recent space"]
 h = ["yabai", ["-m", "space", "--focus", "prev"], "prev space"]
 l = ["yabai", ["-m", "space", "--focus", "next"], "next space"]
+s = ["sketchybar", ["--trigger", "yabai.clicked"], "switch space layout"]
 
 [root.w]
 name = "window"
-order = ["h", "l", "l", "r", "[", "]"]
+order = [
+    "h",
+    "l",
+    "l",
+    "r",
+    "[",
+    "]",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "a",
+    "d",
+]
 h = ["yabai", ["-m", "window", "--focus", "west"], "focus west window"]
 l = ["yabai", ["-m", "window", "--focus", "east"], "focus east window"]
 r = ["yabai", ["-m", "window", "--focus", "recent"], "focus recent window"]
 "[" = ["yabai", ["-m", "window", "--focus", "prev"], "focus prev window"]
 "]" = ["yabai", ["-m", "window", "--focus", "next"], "focus next window"]
+1 = ["yabai", ["-m", "window", "--space", "1", "--focus"], "move to space 1"]
+2 = ["yabai", ["-m", "window", "--space", "2", "--focus"], "move to space 2"]
+3 = ["yabai", ["-m", "window", "--space", "3", "--focus"], "move to space 3"]
+4 = ["yabai", ["-m", "window", "--space", "4", "--focus"], "move to space 4"]
+5 = ["yabai", ["-m", "window", "--space", "5", "--focus"], "move to space 5"]
+6 = ["yabai", ["-m", "window", "--space", "6", "--focus"], "move to space 6"]
+7 = ["yabai", ["-m", "window", "--space", "7", "--focus"], "move to space 7"]
+8 = ["yabai", ["-m", "window", "--space", "8", "--focus"], "move to space 8"]
+9 = ["yabai", ["-m", "window", "--space", "9", "--focus"], "move to space 9"]
+"a" = ["yabai", ["-m", "window", "--ratio", "rel:0.1"], "window size +10%"]
+"d" = ["yabai", ["-m", "window", "--ratio", "rel:-0.1"], "window size -10%"]
 
 # h = ["window", "left"]
 # l = ["window", "right"]
