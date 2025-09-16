@@ -16,6 +16,11 @@ log.d("配置内容: " .. hs.inspect(config))
 
 -- 加载菜单
 local menu = require("menu")
+menu.position = config["menu_position"] or "bottom_center"
+if config["menu_style"] then
+    menu.style = config["menu_style"]
+end
+
 obj.rootMenu = menu:new({
     name = '',
     id = '',

@@ -101,18 +101,19 @@ local function calcViewRect(menuObj)
     local height = #menuObj.items * 21 + titleHeight
     local x = 0
     local y = 0
+    local margintVertical = 32
     if menuObj.position == "top_center" then
         x = screen.x + (screen.w / 2) - (width / 2)
-        y = screen.y + 30
+        y = screen.y + margintVertical
     elseif menuObj.position == "bottom_center" then
         x = screen.x + (screen.w / 2) - (width / 2)
-        y = screen.y + screen.h - height - 30
+        y = screen.y + screen.h - height - margintVertical
     elseif menuObj.position == "right_bottom" then
-        x = screen.x + screen.w - width - 30
-        y = screen.y + screen.h - height - 30
+        x = screen.x + screen.w - width - margintVertical
+        y = screen.y + screen.h - height - margintVertical
     elseif menuObj.position == "left_bottom" then
-        x = screen.x + 30
-        y = screen.y + screen.h - height - 30
+        x = screen.x + margintVertical
+        y = screen.y + screen.h - height - margintVertical
     end
 
     return { x = x, y = y, w = width, h = height }
