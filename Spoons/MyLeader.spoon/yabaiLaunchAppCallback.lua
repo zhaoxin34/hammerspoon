@@ -3,7 +3,7 @@
 
 local appWatcher = require("appWatcher")
 
-local log = hs.logger.new('MyLeader.yabaiLaunchApp', 'info')
+local log = hs.logger.new('yabaiLaunchApp', 'info')
 
 local yabaiPath = "/opt/homebrew/bin/yabai" -- Intel Mac 改成 /usr/local/bin/yabai
 

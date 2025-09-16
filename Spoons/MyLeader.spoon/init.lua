@@ -1,7 +1,7 @@
 package.path = package.path .. ";" .. hs.configdir .. "/Spoons/MyLeader.spoon/?.lua"
 
 local obj = {}
-local log = hs.logger.new('MyLeader.init', 'debug')
+local log = hs.logger.new('LeaderInit', 'info')
 obj.__index = obj
 
 obj.name = "MyLeader"

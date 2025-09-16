@@ -2,7 +2,7 @@
 --- @class MyLeader.taskCommand
 
 local obj = {}
-local log = hs.logger.new('MyLeader.taskCommand', 'debug')
+local log = hs.logger.new('taskCommand', 'debug')
 
 local function callback(command, args, rc, out, err)
     local output = "执task命令, 参数: " .. "command: " .. hs.inspect(command) .. ", args: " .. hs.inspect(args)

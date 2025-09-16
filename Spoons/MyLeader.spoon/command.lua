@@ -5,7 +5,7 @@
 --- @field params table 命令参数
 
 -- 创建一个logger实例
-local log = hs.logger.new('MyLeader.command', 'info')
+local log = hs.logger.new('command', 'info')
 
 local obj = {}
 

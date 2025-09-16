@@ -15,14 +15,49 @@
 --- @field shownMenu menu? 当前正在显示的菜单（可选）
 --- @field modeKey string? 模式呼出键（可选）
 --- @field modeKeyPressCallback function? 模式呼出键按下回调（可选）
+--- @field position string 菜单位置（"top_center", "bottom_center", "right_bottom", "left_bottom"）
 
 local obj = {}
-local log = hs.logger.new('MyLeader.menu', 'info')
+local log = hs.logger.new('menu', 'info')
 obj.modeKey = nil
 obj.modeKeyPressCallback = nil
+obj.position = "bottom_center"
 
 -- 当前正在显示的菜单
 obj.shownMenu = nil
+-- 样式
+obj.style = [[
+    body {
+        font-family: Menlo, monospace;
+        background-color: rgba(40, 44, 52, 0.8);
+        color: white;
+    }
+
+    .menu-container {
+        width: 100%;
+        height: 100%;
+    }
+
+    .menu-item {
+        font-size: 13px;
+        padding: 2px 10px;
+        line-height: 16px;
+    }
+
+    .hot-key {
+        color: #ffb5f4;
+        font-weight: bold;
+    }
+
+    .menu-value {
+        color: #aad9ff;
+    }
+
+    h1 {
+        font-size: 14px;
+        margin: 2px 10px;
+    }
+]]
 
 local function getMenuHtml(menuObj)
     local html = [[
@@ -33,36 +68,11 @@ local function getMenuHtml(menuObj)
         <title>Leader Menu</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
         <meta charset="UTF-8">
-        <style>
-            body {
-                font-family: Menlo, monospace;
-                background-color: rgba(40, 44, 52, 0.8);
-                color: white;
-            }
-
-            .menu-item {
-                font-size: 13px;
-                padding: 2px 10px;
-                line-height: 16px;
-            }
-
-            .hot-key {
-                color: #ffb5f4;
-                font-weight: bold;
-            }
-
-            .menu-value {
-                color: #aad9ff;
-            }
-
-            h1 {
-                font-size: 14px;
-                margin: 2px 10px;
-            }
-        </style>
+        <style>]] .. obj.style .. [[</style>
     </head>
 
     <body>
+        <div class="menu-container">
         <h1>]] .. (menuObj.name or "Menu") .. [[</h1>
     ]]
 
@@ -73,6 +83,7 @@ local function getMenuHtml(menuObj)
     end
 
     html = html .. [[
+    </div>
     </body>
     </html>
     ]]
@@ -80,22 +91,43 @@ local function getMenuHtml(menuObj)
     return html
 end
 
+--- 计算视图矩形
+--- @param menuObj menu
+--- @return table 视图矩形
+local function calcViewRect(menuObj)
+    local screen = hs.mouse.getCurrentScreen():fullFrame()
+    local width = 260
+    local titleHeight = 32
+    local height = #menuObj.items * 21 + titleHeight
+    local x = 0
+    local y = 0
+    if menuObj.position == "top_center" then
+        x = screen.x + (screen.w / 2) - (width / 2)
+        y = screen.y + 30
+    elseif menuObj.position == "bottom_center" then
+        x = screen.x + (screen.w / 2) - (width / 2)
+        y = screen.y + screen.h - height - 30
+    elseif menuObj.position == "right_bottom" then
+        x = screen.x + screen.w - width - 30
+        y = screen.y + screen.h - height - 30
+    elseif menuObj.position == "left_bottom" then
+        x = screen.x + 30
+        y = screen.y + screen.h - height - 30
+    end
+
+    return { x = x, y = y, w = width, h = height }
+end
+
 ---create html view for menu
 ---@param menuObj menu
 ---@return hs.webview
 local function createView(menuObj)
-    local screen = hs.screen.mainScreen():frame()
-    local width = 260
-    local titleHeight = 32
-    local height = #menuObj.items * 21 + titleHeight
-    local x = screen.w - width - 30
-    local y = screen.h - height - 30
+    local rect = calcViewRect(menuObj)
 
-    local view = hs.webview.new({ x = x, y = y, w = width, h = height })
+    local view = hs.webview.new(rect)
         :allowTextEntry(false)
         :html(getMenuHtml(menuObj))
         :transparent(true)
-        :shadow(true)
         :level(hs.drawing.windowLevels.popUpMenu)
     return view
 end
@@ -161,6 +193,7 @@ function obj:show()
     end
     self.view = self.view or createView(self)
     self.modal = self.modal or createViewModal(self)
+    self.view:frame(calcViewRect(self))
     self.view:show()
     self.modal:enter()
     if self.mode == "FLOAT" then
@@ -204,12 +237,10 @@ end
 --- 隐藏菜单, 如果是固定状态则不隐藏
 function obj:hide()
     if self.view then
-        self.view:delete()
-        self.view = nil
+        self.view:hide(0.2)
     end
     if self.modal then
         self.modal:exit()
-        self.modal = nil
     end
     self.status = "HIDDEN"
     if self.hideTimer then

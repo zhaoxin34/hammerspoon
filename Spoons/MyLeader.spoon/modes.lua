@@ -6,7 +6,7 @@
 local obj = {}
 local menu = require("menu")
 local loadMenu = require("loadMenu")
-local log = hs.logger.new('MyLeader.modes', 'debug')
+local log = hs.logger.new('modes', 'debug')
 
 obj.menus = {}
 

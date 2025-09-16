@@ -1,7 +1,7 @@
 --- 右侧cmd按下的功能
 
 local obj = {}
-local log = hs.logger.new('MyLeader.rightCmdKey', 'info')
+local log = hs.logger.new('rightCmdKey', 'info')
 
 -- 定义两个方法，分别在按下和抬起时触发
 local function onRightCmdDown()

@@ -2,7 +2,7 @@
 
 local obj = {}
 
-local log = hs.logger.new('MyLeader.executeCommand', 'debug')
+local log = hs.logger.new('executeCommand', 'debug')
 
 function obj:execute(params)
     local out, success, _, rc = hs.execute(params)

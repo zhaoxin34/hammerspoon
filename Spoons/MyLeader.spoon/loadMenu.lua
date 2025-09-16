@@ -1,5 +1,5 @@
 --加载菜单
-local log = hs.logger.new('MyLeader.loadMenu', 'info')
+local log = hs.logger.new('loadMenu', 'info')
 local command = require("command")
 local menu = require("menu")
 local menuItem = require("menuItem")

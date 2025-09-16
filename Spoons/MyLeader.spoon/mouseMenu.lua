@@ -3,7 +3,7 @@
 local menu = require("menu")
 local menuItem = require("menuItem")
 local menuObj = menu:new({ id = "mouse", name = "鼠标模式", mode = "PIN" })
-local log = hs.logger.new('MyLeader.mouseMenu', 'debug')
+local log = hs.logger.new('mouseMenu', 'debug')
 
 -- 鼠标移动步长（像素）
 local step = 20
