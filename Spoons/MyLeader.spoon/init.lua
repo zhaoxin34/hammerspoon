@@ -68,6 +68,19 @@ menu.modeKeyPressCallback = function()
     modes.onAppFocus(appName)
 end
 
+-- 加载九宫格菜单
+local nineSpace = require("nineSpace.init")
+
+--- 显示九宫格菜单
+obj.showNineSpace = function()
+    nineSpace:show()
+end
+
+--- 隐藏九宫格菜单
+obj.hideNineSpace = function()
+    nineSpace:hide()
+end
+
 -- 打开应用后，使用yabai和appWatch跳转到对应space
 -- require("yabaiLaunchAppCallback")
 return obj

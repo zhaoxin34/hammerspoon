@@ -93,6 +93,10 @@ local function loadMenu(_menu, _config)
             -- 这是一个子菜单
             local subMenu = menu:new({
                 name = item.name,
+                mode = item.mode or "FLOAT",
+                silent = item.silent or false,
+                afterShow = item.afterShow and load(item.afterShow) or nil,
+                afterHide = item.afterHide and load(item.afterHide) or nil,
             })
             local menuItemObj = menuItem:new({
                 key = key,

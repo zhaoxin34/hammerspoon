@@ -28,7 +28,7 @@ obj.shownMenu = nil
 -- 样式
 obj.style = [[
     body {
-        font-family: Menlo, monospace;
+        font-family: Menlo, monospace, JetBrainsMono Nerd Font;
         background-color: rgba(40, 44, 52, 0.8);
         color: white;
     }
@@ -194,14 +194,22 @@ function obj:show()
     end
     self.view = self.view or createView(self)
     self.modal = self.modal or createViewModal(self)
-    self.view:frame(calcViewRect(self))
-    self.view:show()
+    if not self.silent then
+        self.view:frame(calcViewRect(self))
+        self.view:show()
+    end
     self.modal:enter()
     if self.mode == "FLOAT" then
         self.status = "SHOWN"
         self.hideTimer = hs.timer.doAfter(self.hideTimeout, function() self:hide() end)
     else
         self.status = "PINNED"
+    end
+
+    log.i(self.name .. "afterShow: " .. hs.inspect(self.afterShow))
+
+    if self.afterShow then
+        self.afterShow()
     end
 
     -- 当前展示的菜单
@@ -248,6 +256,10 @@ function obj:hide()
         self.hideTimer:stop()
         self.hideTimer = nil
     end
+    if self.afterHide then
+        self.afterHide()
+    end
+
     obj.shownMenu = nil
 end
 
@@ -267,6 +279,9 @@ function obj:new(params)
     menuObj.items = {}
     menuObj.hideTimeout = 2
     menuObj.mode = params.mode or "FLOAT"
+    menuObj.silent = params.silent or false
+    menuObj.afterShow = params.afterShow or nil
+    menuObj.afterHide = params.afterHide or nil
     return menuObj
 end
 

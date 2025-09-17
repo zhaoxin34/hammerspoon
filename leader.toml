@@ -6,8 +6,8 @@ mode_key = "tab"
 menu_position = "top_center"
 menu_style = """
     body {
-        font-family: Menlo, monospace;
-        background-color: #24283baf;
+        font-family: Menlo, monospace, JetBrainsMono Nerd Font;
+        background-color: #24283bcf;
         color: white;
     }
     .menu-container {
@@ -16,9 +16,10 @@ menu_style = """
     }
 
     .menu-item {
-        font-size: 13px;
+        font-size: 12px;
         padding: 2px 10px;
         line-height: 16px;
+        color:rgb(156, 88, 196);
     }
 
     .hot-key {
@@ -38,8 +39,8 @@ menu_style = """
 """
 
 [root]
-show_timeout = 5   # 自动隐藏时间，单位秒，默认5秒
-name = "My Leader"
+show_timeout = 5     # 自动隐藏时间，单位秒，默认5秒
+name = "󰮫 My Leader"
 # 显式指定菜单项顺序
 order = ["a", "s", "o", "p", "q", "b", "x", "h"]
 p = [
@@ -67,8 +68,13 @@ s = [
 
 [root.s]
 name = "space"
+silent = true
+mode = "PIN"
+afterShow = "spoon.MyLeader.showNineSpace()"
+afterHide = "spoon.MyLeader.hideNineSpace()"
+
 # 显式指定子菜单顺序
-order = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "h", "l", "r", "s"]
+order = ["u", "i", "o", "j", "k", "l", "m", ",", ".", "r", "s"]
 1 = ["hotkey", [["ctrl", "shift"], "1"], "space 1"]
 2 = ["hotkey", [["ctrl", "shift"], "2"], "space 2"]
 3 = ["hotkey", [["ctrl", "shift"], "3"], "space 3"]
@@ -78,16 +84,22 @@ order = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "h", "l", "r", "s"]
 7 = ["hotkey", [["ctrl", "shift"], "7"], "space 7"]
 8 = ["hotkey", [["ctrl", "shift"], "8"], "space 8"]
 9 = ["hotkey", [["ctrl", "shift"], "9"], "space 9"]
+u = ["hotkey", [["ctrl", "shift"], "1"], "space 1"]
+i = ["hotkey", [["ctrl", "shift"], "2"], "space 2"]
+o = ["hotkey", [["ctrl", "shift"], "3"], "space 3"]
+j = ["hotkey", [["ctrl", "shift"], "4"], "space 4"]
+k = ["hotkey", [["ctrl", "shift"], "5"], "space 5"]
+l = ["hotkey", [["ctrl", "shift"], "6"], "space 6"]
+m = ["hotkey", [["ctrl", "shift"], "7"], "space 7"]
+"," = ["hotkey", [["ctrl", "shift"], "8"], "space 8"]
+"." = ["hotkey", [["ctrl", "shift"], "9"], "space 9"]
 r = ["yabai", ["-m", "space", "--focus", "recent"], "recent space"]
-h = ["yabai", ["-m", "space", "--focus", "prev"], "prev space"]
-l = ["yabai", ["-m", "space", "--focus", "next"], "next space"]
 s = ["sketchybar", ["--trigger", "yabai.clicked"], "switch space layout"]
 
 [root.w]
 name = "window"
 order = [
     "h",
-    "l",
     "l",
     "r",
     "[",
