@@ -206,8 +206,6 @@ function obj:show()
         self.status = "PINNED"
     end
 
-    log.i(self.name .. "afterShow: " .. hs.inspect(self.afterShow))
-
     if self.afterShow then
         self.afterShow()
     end
@@ -232,7 +230,7 @@ function obj:isHidden()
 end
 
 function obj:pin()
-    log.i("pin menu: " .. (self.name))
+    log.d("pin menu: " .. (self.name))
     if not self:isShown() then
         return
     end
