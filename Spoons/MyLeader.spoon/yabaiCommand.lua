@@ -6,7 +6,7 @@ local task = require("taskCommand")
 local yabaiPath = "/opt/homebrew/bin/yabai"
 
 function obj:execute(params)
-    task:execute({ yabaiPath, params })
+    return task:execute({ yabaiPath, params })
 end
 
 function obj:init(path)

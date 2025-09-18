@@ -201,7 +201,7 @@ function obj:show()
     self.modal:enter()
     if self.mode == "FLOAT" then
         self.status = "SHOWN"
-        self.hideTimer = hs.timer.doAfter(self.hideTimeout, function() self:hide() end)
+        self.hideTimer = hs.timer.doAfter(self.showTimeout, function() self:hide() end)
     else
         self.status = "PINNED"
     end
@@ -275,7 +275,7 @@ function obj:new(params)
     menuObj.name = params.name
     menuObj.father = params.father
     menuObj.items = {}
-    menuObj.hideTimeout = 2
+    menuObj.showTimeout = params.showTimeout or 2
     menuObj.mode = params.mode or "FLOAT"
     menuObj.silent = params.silent or false
     menuObj.afterShow = params.afterShow or nil

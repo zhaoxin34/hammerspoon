@@ -2,11 +2,12 @@
 
 local obj = {}
 
+local log = hs.logger.new('nineSpace', 'info')
 local currentFile = debug.getinfo(1, "S").source:sub(2)
 local currentDir = currentFile:match("(.*/)")
 local htmlPath = currentDir .. "sample.html"
-local height, width = 300, 300
-print(htmlPath)
+local height, width = 480, 480
+local yabaiPath = "/opt/homebrew/bin/yabai"
 
 local function read_all(path)
     local f, err = io.open(path, "r") -- 文本模式
@@ -52,29 +53,33 @@ local view = hs.webview.new(rect)
 
 -- 请所有class为cell的元素
 local function clearAllActive()
-    local js = [[
-    var els = document.getElementsByClassName('cell');
-    for (var i = 0; i < els.length; i++) {
-      els[i].classList.remove('active');
-    }
-    ]]
+    local js = "clearAllActive()"
     view:evaluateJavaScript(js)
+end
+
+--- 通过yabai加载空间的窗口信息
+local function loadSpaceWindows()
+    local clearContent = "clearContent()"
+    view:evaluateJavaScript(clearContent)
+
+    hs.task.new(yabaiPath, function(exitCode, stdOut, stdErr)
+        if exitCode ~= 0 or not stdOut then return end
+        log.i("stdOut: " .. stdOut)
+        local js = "setContent(" .. stdOut .. ")"
+        view:evaluateJavaScript(js)
+    end, { "-m", "query", "--windows" }):start()
 end
 
 -- 动态加 class
 local function setActive(spaceId)
-    local js = [[
-    var el = document.getElementById('space-]] .. spaceId .. [[');
-    if (el) {
-      el.classList.add('active');
-    }
-    ]]
+    local js = "setActive(" .. spaceId .. ")"
     view:evaluateJavaScript(js)
 end
 
 function obj:show()
     clearAllActive()
     setActive(getSpaceId())
+    loadSpaceWindows()
     view:show()
 end
 

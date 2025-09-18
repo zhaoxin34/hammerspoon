@@ -39,7 +39,7 @@ menu_style = """
 """
 
 [root]
-show_timeout = 5     # 自动隐藏时间，单位秒，默认5秒
+showTimeout = 3      # 自动隐藏时间，单位秒，默认5秒
 name = "󰮫 My Leader"
 # 显式指定菜单项顺序
 order = ["a", "s", "o", "p", "q", "b", "x", "h"]
@@ -69,7 +69,8 @@ s = [
 [root.s]
 name = "space"
 silent = true
-mode = "PIN"
+mode = "FLOAT"
+showTimeout = 5
 afterShow = "spoon.MyLeader.showNineSpace()"
 afterHide = "spoon.MyLeader.hideNineSpace()"
 
@@ -130,8 +131,8 @@ r = ["yabai", ["-m", "window", "--focus", "recent"], "focus recent window"]
 7 = ["yabai", ["-m", "window", "--space", "7", "--focus"], "move to space 7"]
 8 = ["yabai", ["-m", "window", "--space", "8", "--focus"], "move to space 8"]
 9 = ["yabai", ["-m", "window", "--space", "9", "--focus"], "move to space 9"]
-"a" = ["yabai", ["-m", "window", "--ratio", "rel:0.1"], "window size +10%"]
-"d" = ["yabai", ["-m", "window", "--ratio", "rel:-0.1"], "window size -10%"]
+"a" = ["yabai", ["-m", "window", "--ratio", "abs:0.6"], "window 6:4"]
+"b" = ["yabai", ["-m", "window", "--ratio", "abs:0.4"], "window 4:6"]
 
 # h = ["window", "left"]
 # l = ["window", "right"]

@@ -95,6 +95,7 @@ local function loadMenu(_menu, _config)
                 name = item.name,
                 mode = item.mode or "FLOAT",
                 silent = item.silent or false,
+                showTimeout = item.showTimeout or 2,
                 afterShow = item.afterShow and load(item.afterShow) or nil,
                 afterHide = item.afterHide and load(item.afterHide) or nil,
             })

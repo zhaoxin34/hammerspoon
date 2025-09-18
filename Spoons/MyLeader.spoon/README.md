@@ -37,10 +37,10 @@ flowchart TD
       * PINED
       * SHOWN
       * HIDDEN
-    * timeout 展示的超时时间（秒）
+    * showTimeout 展示的超时时间（秒）
     * view webview对象
     * mode show后状态：pin or float
-    * pinTimeout pin状态的超时时间，pin后如果没有操作超过这个时间就自动隐藏
+    * ?pinTimeout pin状态的超时时间，pin后如果没有操作超过这个时间就自动隐藏
     * silent (true|false) 是：只绑定快捷键，而不展示菜单
     * afterShow 显示后的回调
     * afterHide 隐藏后的回调
