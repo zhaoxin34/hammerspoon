@@ -23,6 +23,8 @@ obj.modeKey = nil
 obj.modeKeyPressCallback = nil
 obj.position = "bottom_center"
 
+local sketchybarCommand = require("sketchybarCommand")
+
 -- 当前正在显示的菜单
 obj.shownMenu = nil
 -- 样式
@@ -73,7 +75,6 @@ local function getMenuHtml(menuObj)
 
     <body>
         <div class="menu-container">
-        <h1>]] .. (menuObj.name or "Menu") .. [[</h1>
     ]]
 
     for _, item in ipairs(menuObj.items) do
@@ -97,7 +98,7 @@ end
 local function calcViewRect(menuObj)
     local screen = hs.mouse.getCurrentScreen():fullFrame()
     local width = 260
-    local titleHeight = 32
+    local titleHeight = 10
     local height = #menuObj.items * 21 + titleHeight
     local x = 0
     local y = 0
@@ -210,6 +211,9 @@ function obj:show()
         self.afterShow()
     end
 
+    hs.timer.doAfter(0.005, function()
+        sketchybarCommand:execute({ "--trigger", "my_leader.show", "MSG=" .. self.name })
+    end)
     -- 当前展示的菜单
     obj.shownMenu = self
 end
@@ -258,6 +262,7 @@ function obj:hide()
         self.afterHide()
     end
 
+    sketchybarCommand:execute({ "--trigger", "my_leader.hide" })
     obj.shownMenu = nil
 end
 

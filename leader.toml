@@ -99,29 +99,22 @@ s = ["sketchybar", ["--trigger", "yabai.clicked"], "switch space layout"]
 
 [root.w]
 name = "window"
-order = [
-    "h",
-    "l",
-    "r",
-    "[",
-    "]",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "a",
-    "d",
-]
+order = ["h", "l", "r", "[", "]", "a", "d"]
 h = ["yabai", ["-m", "window", "--focus", "west"], "focus west window"]
 l = ["yabai", ["-m", "window", "--focus", "east"], "focus east window"]
 r = ["yabai", ["-m", "window", "--focus", "recent"], "focus recent window"]
 "[" = ["yabai", ["-m", "window", "--focus", "prev"], "focus prev window"]
 "]" = ["yabai", ["-m", "window", "--focus", "next"], "focus next window"]
+"a" = ["yabai", ["-m", "window", "--ratio", "abs:0.6"], "window 6:4"]
+"b" = ["yabai", ["-m", "window", "--ratio", "abs:0.4"], "window 4:6"]
+
+[root.t]
+name = "move window to space"
+silent = true
+mode = "FLOAT"
+showTimeout = 5
+afterShow = "spoon.MyLeader.showNineSpace()"
+afterHide = "spoon.MyLeader.hideNineSpace()"
 1 = ["yabai", ["-m", "window", "--space", "1", "--focus"], "move to space 1"]
 2 = ["yabai", ["-m", "window", "--space", "2", "--focus"], "move to space 2"]
 3 = ["yabai", ["-m", "window", "--space", "3", "--focus"], "move to space 3"]
@@ -131,8 +124,15 @@ r = ["yabai", ["-m", "window", "--focus", "recent"], "focus recent window"]
 7 = ["yabai", ["-m", "window", "--space", "7", "--focus"], "move to space 7"]
 8 = ["yabai", ["-m", "window", "--space", "8", "--focus"], "move to space 8"]
 9 = ["yabai", ["-m", "window", "--space", "9", "--focus"], "move to space 9"]
-"a" = ["yabai", ["-m", "window", "--ratio", "abs:0.6"], "window 6:4"]
-"b" = ["yabai", ["-m", "window", "--ratio", "abs:0.4"], "window 4:6"]
+u = ["yabai", ["-m", "window", "--space", "1", "--focus"], "move to space 1"]
+i = ["yabai", ["-m", "window", "--space", "2", "--focus"], "move to space 2"]
+o = ["yabai", ["-m", "window", "--space", "3", "--focus"], "move to space 3"]
+j = ["yabai", ["-m", "window", "--space", "4", "--focus"], "move to space 4"]
+k = ["yabai", ["-m", "window", "--space", "5", "--focus"], "move to space 5"]
+l = ["yabai", ["-m", "window", "--space", "6", "--focus"], "move to space 6"]
+m = ["yabai", ["-m", "window", "--space", "7", "--focus"], "move to space 7"]
+"," = ["yabai", ["-m", "window", "--space", "8", "--focus"], "move to space 8"]
+"." = ["yabai", ["-m", "window", "--space", "9", "--focus"], "move to space 9"]
 
 # h = ["window", "left"]
 # l = ["window", "right"]
