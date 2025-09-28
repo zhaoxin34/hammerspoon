@@ -8,6 +8,7 @@ local currentDir = currentFile:match("(.*/)")
 local htmlPath = currentDir .. "sample.html"
 local height, width = 480, 480
 local yabaiPath = "/opt/homebrew/bin/yabai"
+local timeoutTimer = nil
 
 local function read_all(path)
     local f, err = io.open(path, "r") -- 文本模式
@@ -75,6 +76,20 @@ local function setActive(spaceId)
     local js = "setActive(" .. spaceId .. ")"
     view:evaluateJavaScript(js)
 end
+
+
+-- 监听space变化，设置上次的spaceId
+-- 监听 Space 切换
+obj.spacesWatcher = hs.spaces.watcher.new(function()
+    if timeoutTimer then
+        timeoutTimer:stop()
+    end
+    obj:hide()
+    obj:show()
+    timeoutTimer = hs.timer.doAfter(1, function() obj:hide() end)
+end)
+
+obj.spacesWatcher:start()
 
 function obj:show()
     clearAllActive()

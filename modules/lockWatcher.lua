@@ -2,7 +2,7 @@
 -- 定义要关闭的应用程序
 local appsToQuit = { "Skydimo", "NetEaseMusic" }
 -- 定义要打开的应用程序
-local appsToOpen = { "Iterm", "Skydimo" }
+local appsToOpen = { "Skydimo" }
 
 local isLocked = false
 

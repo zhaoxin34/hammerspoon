@@ -30,9 +30,9 @@ spoon.LookupSelection:bindHotkeys({
 
 hs.loadSpoon("MyLeader")
 
-hs.hotkey.bind({ "ctrl", "alt", "cmd" }, "R", function()
-    hs.reload()
-end)
+-- hs.hotkey.bind({ "ctrl", "alt", "cmd" }, "R", function()
+--     hs.reload()
+-- end)
 hs.alert("配置已重新加载")
 
 -- -- hs.task.new("/usr/bin/env", nil, { "open", "https://www.google.com" }):start()
