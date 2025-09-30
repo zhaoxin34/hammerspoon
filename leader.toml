@@ -53,12 +53,14 @@ b = ["open", "https://www.bilibili.com/", "哔哩哔哩", "tpzhao"]
 
 [root.a]
 name = "Apps"
-order = ["c", "v", "b", "i", "w", "s"]
+order = ["c", "v", "b", "i", "w", "o", "r", "s"]
 v = ["app", "Visual Studio Code"]
 c = ["app", "Cursor"]
 b = ["app", "Google Chrome"]
 i = ["app", "iTerm"]
-w = ["app", "Wechat"]
+w = ["app", "WezTerm"]
+o = ["app", "Obsidian"]
+r = ["app", "Reminders"]
 s = [
     "url",
     "raycast://extensions/Codely/google-chrome/search-tab",
@@ -153,9 +155,11 @@ r = ["hs", "hs.reload()", "重载配置"]
 l = ["hs", "hs.openConsole()", "打开控制台"]
 o = ["url", "https://www.hammerspoon.org/docs/", "hammerspoon文档"]
 
-[modes.chrome]
-name = "Google Chrome"
-order = ["h", "l", "s"]
-l = ["hotkey", [["ctrl"], "tab"], "切换到左侧标签页"]
-h = ["hotkey", [["ctrl", "shift"], "tab"], "切换到右侧标签页"]
-s = ["hotkey", [["shift", "cmd"], "a"], "搜索标签页"]
+[modes]
+
+# [modes.chrome]
+# name = "Google Chrome"
+# order = ["h", "l", "s"]
+# l = ["hotkey", [["ctrl"], "tab"], "切换到左侧标签页"]
+# h = ["hotkey", [["ctrl", "shift"], "tab"], "切换到右侧标签页"]
+# s = ["hotkey", [["shift", "cmd"], "a"], "搜索标签页"]
