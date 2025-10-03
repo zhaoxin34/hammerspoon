@@ -189,7 +189,7 @@
                     continue;
                 }
                 console.log(content)
-                var li = $('<li></li>').html(content.title);
+                var li = $('<li></li>').html(content.app + ": " + content.title);
                 $("#space-" + content.space + " > ul").append(li);
             }
         }
