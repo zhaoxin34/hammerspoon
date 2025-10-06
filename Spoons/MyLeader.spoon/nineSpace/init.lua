@@ -67,7 +67,7 @@ local function loadSpaceWindows()
 			if exitCode ~= 0 or not stdOut then
 				return
 			end
-			log.i("stdOut: " .. stdOut)
+			log.d("stdOut: " .. stdOut)
 			local js = "setContent(" .. stdOut .. ")"
 			view:evaluateJavaScript(js)
 		end, { "-m", "query", "--windows" })
