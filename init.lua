@@ -6,7 +6,9 @@ log.i("Hammerspoon 启动")
 hs.ipc.cliInstall("/opt/homebrew/")
 
 package.path = package.path .. ";~/.hammerspoon/modules/?.lua"
-require('modules.lockWatcher')
+
+-- 切换应用切换到小写，锁屏关闭应用
+require('modules.appWatcher')
 
 -- spoon doc
 --https://github.com/Hammerspoon/hammerspoon/blob/master/SPOONS.md

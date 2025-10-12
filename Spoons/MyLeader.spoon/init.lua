@@ -56,17 +56,17 @@ local loadMenu = require("loadMenu")
 loadMenu(obj.rootMenu, config["root"])
 
 -- 加载应用focus的监听
-local appWatcher = require("appWatcher")
-local modes = require("modes"):load(config["modes"])
-appWatcher.activeCallback = modes.onAppFocus
+-- local appWatcher = require("appWatcher")
+-- local modes = require("modes"):load(config["modes"])
+-- appWatcher.activeCallback = modes.onAppFocus
 
 -- 设置模式键响应
-menu.modeKey = config["mode_key"]
-menu.modeKeyPressCallback = function()
-    local app = hs.application.frontmostApplication()
-    local appName = app:name() or ""
-    modes.onAppFocus(appName)
-end
+-- menu.modeKey = config["mode_key"]
+-- menu.modeKeyPressCallback = function()
+--     local app = hs.application.frontmostApplication()
+--     local appName = app:name() or ""
+--     modes.onAppFocus(appName)
+-- end
 
 -- 加载九宫格菜单
 local nineSpace = require("nineSpace.init")
