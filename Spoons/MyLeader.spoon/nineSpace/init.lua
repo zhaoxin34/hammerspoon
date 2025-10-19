@@ -80,21 +80,6 @@ local function setActive(spaceId)
 	view:evaluateJavaScript(js)
 end
 
--- 监听space变化，设置上次的spaceId
--- 监听 Space 切换
-obj.spacesWatcher = hs.spaces.watcher.new(function()
-	if timeoutTimer then
-		timeoutTimer:stop()
-	end
-	obj:hide()
-	obj:show()
-	timeoutTimer = hs.timer.doAfter(0.5, function()
-		obj:hide()
-	end)
-end)
-
-obj.spacesWatcher:start()
-
 function obj:show()
 	clearAllActive()
 	setActive(getSpaceId())
