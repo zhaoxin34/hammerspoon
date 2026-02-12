@@ -27,9 +27,8 @@ obj.rootMenu = menu:new({
     father = nil,
 })
 
-local rightCmdKey = require("rightCmdKey")
-
-rightCmdKey.onRightCmdUp = function()
+-- 使用 F18 触发 leader 菜单
+hs.hotkey.bind({}, "F18", function()
     if not menu.shownMenu then
         obj.rootMenu:show()
     else
@@ -39,7 +38,7 @@ rightCmdKey.onRightCmdUp = function()
             menu.shownMenu:hide()
         end
     end
-end
+end)
 
 -- 添加鼠标模式
 local mouseMenu = require("mouseMenu")
