@@ -1,34 +1,13 @@
--- 快捷键绑定模块
--- 用于配置全局快捷键绑定
+local screen = hs.screen.mainScreen() -- 获取主屏幕
+local screenFrame = screen:frame() -- 获取屏幕的尺寸
 
--- hs.keycodes.currentSourceID() 可以获得输入法id
--- 英文输入法 ID
-local englishInputSource = "com.apple.keylayout.ABC"
--- 中文输入法 ID (简体拼音)
-local chineseInputSource = "im.rime.inputmethod.Squirrel.Hans"
+-- 计算右下角的位置
+local rightBottom = hs.geometry(
+	screenFrame.x + screenFrame.w - 150, -- 右边位置（可调节宽度）
+	screenFrame.y + screenFrame.h - 50 -- 下边位置（可调节高度）
+)
 
--- 切换到英文输入法
-local function switchToEnglish()
-	-- 检查当前是否是中文输入法
-	local currentSource = hs.keycodes.currentSourceID()
-	if currentSource ~= englishInputSource then
-		-- 如果当前是中文输入法，先发送 esc 键退出输入状态
-		hs.eventtap.keyStroke({}, "Escape", 0)
-	end
-	-- 切换到英文输入法
-	hs.keycodes.currentSourceID(englishInputSource)
-	hs.alert("已切换到英文输入法")
-end
-
--- 切换到中文输入法
-local function switchToChinese()
-	hs.keycodes.currentSourceID(chineseInputSource)
-	hs.alert("已切换到中文输入法")
-end
-
--- 绑定快捷键
--- ctrl+option+e -> 切换英文输入法
-hs.hotkey.bind({ "ctrl", "option" }, "E", switchToEnglish)
-
--- ctrl+option+c -> 切换中文输入法
-hs.hotkey.bind({ "ctrl", "option" }, "C", switchToChinese)
+hs.keycodes.inputSourceChanged(function()
+	local inputMethod = hs.keycodes.currentMethod()
+	hs.alert.show("输入法：" .. (inputMethod or "ABC"), 1, rightBottom)
+end)
