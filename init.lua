@@ -10,6 +10,9 @@ package.path = package.path .. ";~/.hammerspoon/modules/?.lua"
 -- 切换应用切换到小写，锁屏关闭应用
 require("modules.appWatcher")
 
+-- 快捷键绑定模块
+require("modules.bindings")
+
 -- spoon doc
 --https://github.com/Hammerspoon/hammerspoon/blob/master/SPOONS.md
 
