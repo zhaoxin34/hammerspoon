@@ -23,12 +23,12 @@ hs.loadSpoon("SpoonInstall")
 -- spoon.HSKeybindings:show()
 
 -- 使用字典或者notepad打开选中的单词
-spoon.SpoonInstall:andUse("LookupSelection")
-spoon.LookupSelection:bindHotkeys({
-	lexicon = { { "ctrl", "alt", "cmd" }, "l" },
-	neue_notiz = { { "ctrl", "alt", "cmd" }, "n" },
-	hsdocs = { { "ctrl", "alt", "cmd" }, "h" },
-})
+-- spoon.SpoonInstall:andUse("LookupSelection")
+-- spoon.LookupSelection:bindHotkeys({
+-- 	lexicon = { { "ctrl", "alt", "cmd" }, "l" },
+-- 	neue_notiz = { { "ctrl", "alt", "cmd" }, "n" },
+-- 	hsdocs = { { "ctrl", "alt", "cmd" }, "h" },
+-- })
 
 -- -- hot-key的modal管理方法
 -- spoon.SpoonInstall:andUse("ModalMgr")
@@ -38,7 +38,6 @@ hs.loadSpoon("MyLeader")
 -- hs.hotkey.bind({ "ctrl", "alt", "cmd" }, "R", function()
 --     hs.reload()
 -- end)
-hs.alert("配置已重新加载")
 
 -- -- hs.task.new("/usr/bin/env", nil, { "open", "https://www.google.com" }):start()
 
@@ -59,3 +58,10 @@ end)
 hs.hotkey.bind({}, "F17", function()
 	hs.application.launchOrFocus("Google Chrome")
 end)
+
+-- spoon.SpoonInstall:andUse("ReloadConfiguration")
+-- spoon.ReloadConfiguration:start()
+
+require("win_manager")
+
+hs.alert("配置已重新加载")
