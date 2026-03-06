@@ -20,32 +20,32 @@
         }
 
         .grid {
-            width: 480px;
-            height: 480px;
+            width: 160px;
+            height: 160px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(3, 1fr);
-            gap: 6px;
+            gap: 2px;
             background: transparent(1);
             padding: 0;
-            border-radius: 20px;
+            border-radius: 8px;
         }
 
         .cell {
             background: #24283b;
-            border-radius: 8px;
+            border-radius: 6px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 10px;
             font-weight: 500;
             color: #7283CF;
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
             transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
             cursor: pointer;
             position: relative;
-            padding: 8px;
+            padding: 4px;
         }
 
         .cell:hover,
@@ -56,9 +56,7 @@
         }
 
         .icon {
-            position: absolute;
-            top: 8px;
-            left: 12px;
+            font-size: 16px;
             line-height: 1;
         }
 
@@ -67,36 +65,11 @@
         }
 
         .shortcut {
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            line-height: 1;
+            display: none;
         }
 
         .content {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            width: calc(100% - 40px);
-            height: calc(100% - 50px);
-            color: #afafd7;
-            border-radius: 8px;
-            padding: 8px;
-            overflow: hidden;
-        }
-
-        .content li {
-            font-size: 12px;
-            list-style: none;
-            height: 16px;
-            white-space: nowrap;
-            /* 不换行 */
-            overflow: hidden;
-            /* 超出部分隐藏 */
-            text-overflow: clip;
-            /* 超出部分显示省略号 (…) */
-            padding: 0;
-            margin: 0;
+            display: none;
         }
     </style>
 </head>
@@ -105,58 +78,30 @@
     <div class="grid">
         <div id="space-1" class="cell">
             <div class="icon"></div>
-            <div class="shortcut">u</div>
-            <ul class="content">
-            </ul>
         </div>
         <div id="space-2" class="cell">
             <div class="icon">󰇧</div>
-            <div class="shortcut">i</div>
-            <ul class="content">
-            </ul>
         </div>
         <div id="space-3" class="cell">
             <div class="icon">󱍋</div>
-            <div class="shortcut">o</div>
-            <ul class="content">
-            </ul>
         </div>
         <div id="space-4" class="cell">
             <div class="icon">󰭹</div>
-            <div class="shortcut">j</div>
-            <ul class="content">
-            </ul>
         </div>
         <div id="space-5" class="cell active">
             <div class="icon">󰨞</div>
-            <div class="shortcut">k</div>
-            <ul class="content">
-                <li>Code: sldkfj</li>
-            </ul>
         </div>
         <div id="space-6" class="cell">
             <div class="icon">󰧮</div>
-            <div class="shortcut">l</div>
-            <ul class="content">
-            </ul>
         </div>
         <div id="space-7" class="cell">
             <div class="icon"></div>
-            <div class="shortcut">m</div>
-            <ul class="content">
-            </ul>
         </div>
         <div id="space-8" class="cell">
             <div class="icon"></div>
-            <div class="shortcut">,</div>
-            <ul class="content">
-            </ul>
         </div>
         <div id="space-9" class="cell">
             <div class="icon"></div>
-            <div class="shortcut">.</div>
-            <ul class="content">
-            </ul>
         </div>
     </div>
     <script type="text/javascript">

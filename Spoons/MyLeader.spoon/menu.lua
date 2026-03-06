@@ -23,8 +23,6 @@ obj.modeKey = nil
 obj.modeKeyPressCallback = nil
 obj.position = "bottom_center"
 
-local sketchybarCommand = require("sketchybarCommand")
-
 -- 当前正在显示的菜单
 obj.shownMenu = nil
 -- 样式
@@ -211,9 +209,6 @@ function obj:show()
         self.afterShow()
     end
 
-    hs.timer.doAfter(0.005, function()
-        sketchybarCommand:execute({ "--trigger", "my_leader.show", "MSG=" .. self.name })
-    end)
     -- 当前展示的菜单
     obj.shownMenu = self
 end
@@ -262,7 +257,6 @@ function obj:hide()
         self.afterHide()
     end
 
-    sketchybarCommand:execute({ "--trigger", "my_leader.hide" })
     obj.shownMenu = nil
 end
 

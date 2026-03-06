@@ -80,6 +80,4 @@ obj.hideNineSpace = function()
     nineSpace:hide()
 end
 
--- 打开应用后，使用yabai和appWatch跳转到对应space
--- require("yabaiLaunchAppCallback")
 return obj

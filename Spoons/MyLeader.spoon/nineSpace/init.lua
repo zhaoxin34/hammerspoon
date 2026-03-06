@@ -6,8 +6,7 @@ local log = hs.logger.new("nineSpace", "info")
 local currentFile = debug.getinfo(1, "S").source:sub(2)
 local currentDir = currentFile:match("(.*/)")
 local htmlPath = currentDir .. "sample.html"
-local height, width = 480, 480
-local yabaiPath = "/opt/homebrew/bin/yabai"
+local height, width = 160, 160
 local timeoutTimer = nil
 
 local function read_all(path)
@@ -57,33 +56,29 @@ local function clearAllActive()
 	view:evaluateJavaScript(js)
 end
 
---- 通过yabai加载空间的窗口信息
-local function loadSpaceWindows()
-	local clearContent = "clearContent()"
-	view:evaluateJavaScript(clearContent)
-
-	hs.task
-		.new(yabaiPath, function(exitCode, stdOut, stdErr)
-			if exitCode ~= 0 or not stdOut then
-				return
-			end
-			log.d("stdOut: " .. stdOut)
-			local js = "setContent(" .. stdOut .. ")"
-			view:evaluateJavaScript(js)
-		end, { "-m", "query", "--windows" })
-		:start()
-end
-
 -- 动态加 class
 local function setActive(spaceId)
 	local js = "setActive(" .. spaceId .. ")"
 	view:evaluateJavaScript(js)
 end
 
+-- 监听space变化，切换space时显示九宫格
+obj.spacesWatcher = hs.spaces.watcher.new(function()
+	if timeoutTimer then
+		timeoutTimer:stop()
+	end
+	obj:hide()
+	obj:show()
+	timeoutTimer = hs.timer.doAfter(1, function()
+		obj:hide()
+	end)
+end)
+
+obj.spacesWatcher:start()
+
 function obj:show()
 	clearAllActive()
 	setActive(getSpaceId())
-	loadSpaceWindows()
 	view:show()
 end
 

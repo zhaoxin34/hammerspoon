@@ -29,9 +29,7 @@ local hotkeyCommand = require("hotkeyCommand"):init("hotkey")
 local hsCommand = require("hsCommand"):init("hs")
 local textCommand = require("textCommand"):init("text")
 local taskCommand = require("taskCommand"):init("task")
-local yabaiCommand = require("yabaiCommand"):init("yabai")
 local executeCommand = require("executeCommand"):init("exec")
-local sketchybarCommand = require("sketchybarCommand"):init("sketchybar")
 
 obj.commands = {
     [appCommand.path] = appCommand,
@@ -42,9 +40,7 @@ obj.commands = {
     [hsCommand.path] = hsCommand,
     [textCommand.path] = textCommand,
     [taskCommand.path] = taskCommand,
-    [yabaiCommand.path] = yabaiCommand,
     [executeCommand.path] = executeCommand,
-    [sketchybarCommand.path] = sketchybarCommand,
 }
 
 function obj:execute()
