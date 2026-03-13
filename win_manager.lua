@@ -78,5 +78,6 @@ PaperWM.window_filter:rejectApp("iStat Menus Status")
 PaperWM.window_filter:rejectApp("Finder")
 PaperWM.window_filter:rejectApp("WeChat")
 PaperWM.window_filter:rejectApp("DingTalk")
+PaperWM.window_filter:rejectApp("Feishu")
 
 PaperWM:start()
