@@ -62,6 +62,6 @@ end)
 -- spoon.SpoonInstall:andUse("ReloadConfiguration")
 -- spoon.ReloadConfiguration:start()
 
-require("win_manager")
+-- require("win_manager")
 
 hs.alert("配置已重新加载")
