@@ -59,6 +59,10 @@ hs.hotkey.bind({}, "F17", function()
 	hs.application.launchOrFocus("Google Chrome")
 end)
 
+hs.hotkey.bind({}, "F18", function()
+	hs.application.launchOrFocus("ChatGPT Atlas")
+end)
+
 -- spoon.SpoonInstall:andUse("ReloadConfiguration")
 -- spoon.ReloadConfiguration:start()
 
