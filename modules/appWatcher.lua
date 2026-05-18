@@ -34,12 +34,3 @@ CoffeiWatcher = hs.caffeinate.watcher.new(function(eventType)
 end)
 
 CoffeiWatcher:start()
-
-AppWatcher = hs.application.watcher.new(function(_, eventType)
-	if eventType == hs.application.watcher.activated then
-		-- 每次切换应用时，强制切换到英文输入法
-		hs.keycodes.currentSourceID("com.apple.keylayout.ABC")
-	end
-end)
-
-AppWatcher:start()
