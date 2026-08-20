@@ -56,7 +56,8 @@ hs.hotkey.bind({}, "F16", function()
 end)
 
 hs.hotkey.bind({}, "F17", function()
-	hs.application.launchOrFocus("ego lite")
+	hs.application.launchOrFocus("Google Chrome")
+	-- hs.application.launchOrFocus("ego lite")
 end)
 
 -- spoon.SpoonInstall:andUse("ReloadConfiguration")
